@@ -16,23 +16,24 @@
 // to create an account, or if you need your session keys.
 
 // Network Session Key (MSB)
-uint8_t NwkSkey[16] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+uint8_t NwkSkey[16] = { 0x6B, 0x37, 0x4A, 0x7A, 0x98, 0xAD, 0x91, 0x93, 0x47, 0xE9, 0x66, 0x1A, 0xBD, 0x3F, 0x57, 0xAF };
 
 // Application Session Key (MSB)
-uint8_t AppSkey[16] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+uint8_t AppSkey[16] = { 0x06, 0xB8, 0xFB, 0x13, 0x82, 0xD1, 0x04, 0x17, 0xE5, 0xE7, 0x15, 0x30, 0x96, 0xB0, 0xF2, 0x78 };
 
 // Device Address (MSB)
-uint8_t DevAddr[4] = { 0x00, 0x00, 0x00, 0x00 };
+uint8_t DevAddr[4] = { 0x26, 0x01, 0x16, 0x8C };
+
 
 /************************** Example Begins Here ***********************************/
 // Data Packet to Send to TTN
 unsigned char loraData[11] = {"hello LoRa"};
 
 // How many times data transfer should occur, in seconds
-const unsigned int sendInterval = 30;
+const unsigned int sendInterval = 8;
 
-// Pinout for Adafruit Feather 32u4 LoRa
-TinyLoRa lora = TinyLoRa(7, 8, 4);
+// Pinout for RocketScream Mini Ultra Pro with Lora
+TinyLoRa lora = TinyLoRa(2, 5, 3);
 
 // Pinout for Adafruit Feather M0 LoRa
 //TinyLoRa lora = TinyLoRa(3, 8, 4);
@@ -51,7 +52,7 @@ void setup()
   // define multi-channel sending
   lora.setChannel(MULTI);
   // set datarate
-  lora.setDatarate(SF7BW125);
+  lora.setDatarate(SF9BW125);
   if(!lora.begin())
   {
     Serial.println("Failed");

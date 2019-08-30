@@ -11,6 +11,7 @@
 /************************** Configuration ***********************************/
 #include <TinyLoRa.h>
 #include <SPI.h>
+#include <LoraMessage.h>
 
 // Visit your thethingsnetwork.org device console
 // to create an account, or if you need your session keys.
@@ -64,8 +65,11 @@ void setup()
 
 void loop()
 {
+  LoraMessage loraMessage;
+  loraMessage.addUint16(7778);
+  loraMessage.addTemperature(15.43);
   Serial.println("Sending LoRa Data...");
-  lora.sendData(loraData, sizeof(loraData), lora.frameCounter);
+  lora.sendData(loraMessage.getBytes(), loraMessage.getLength(), lora.frameCounter);
   Serial.print("Frame Counter: ");Serial.println(lora.frameCounter);
   lora.frameCounter++;
 
